@@ -1,0 +1,47 @@
+
+<div id="<%= @current_issue.id %>" class="leaderboard">
+
+  <div id="count-board">
+    <h3>Total participants: <%= @current_issue.participant_count %></h3>
+    <h3>Total votes: <%= @current_issue.vote_count %></h3>
+    <h3>Yes: <%= @current_issue.yes_votes %> (<%= @current_issue.get_yes_percentage %>%)</h3>
+    <h3>No:  <%= @current_issue.no_votes %> (<%= @current_issue.get_no_percentage %>%)</h3>
+    <h3>Abstain: <%= @current_issue.abstain_count %></h3>
+  </div>
+
+  <div class="button">
+    <button id="yes-button" type="submit" value="YES" method="POST" action="/issues/<%= @current_issue.id %>">YES!</button>
+  </div>
+
+  <div class="button">
+     <button id="no-button" type="submit" value="NO" method="POST" action="/issues/<%= @current_issue.id %>">NO!</button>
+  </div>
+
+</div>
+
+
+<div class="participants">
+<% @participants.each do |participant| %>
+  <div id="<%= participant.id %>" class="participant">
+
+    <h3 class="participant-username"><a href="#"><%= participant.username %></a><em>User ID: <%= participant.id %></em> </h3>
+
+
+    <div class="avatar-holder">
+      <img class="participant-image" src="<%= participant.image_url %>" />
+    </div>
+
+    <div class="participant-vote-count">
+      <%= participant.get_vote_power(@current_issue.id) %>
+    </div>
+
+    <div class="constituents">
+    </div>
+
+     <button class="delegate-button btn btn-primary btn-small" type="submit" value="Delegate" method="POST" action="/issues/<%= @current_issue.id %>/users/<%= participant.id %>/delegate" style="">Delegate</button>
+
+  </div>
+<% end %>
+</div>
+
+

@@ -1,0 +1,10 @@
+<% @issues.each do |issue| %>
+  <div id="issue-<%= issue.id %>"class="issue">
+
+    <div class="issue-body">
+      <h2 class="issue-heading"><%= link_to issue.title, issue %></h2>
+      <p><%= issue.description %></p>
+    </div>
+</div>
+<% end %>
+
